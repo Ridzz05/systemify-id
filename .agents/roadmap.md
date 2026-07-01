@@ -27,6 +27,11 @@ Setiap agen yang menyelesaikan tugas terstruktur (membuat fitur baru, mengubah a
 
 ## 🚀 Changelog & Checkpoints
 
+### [30 Juni 2026] - Perbaikan Eror Ekspor Ikon Search Phosphor
+- **Apa yang dilakukan:**
+  *   Menghilangkan import `Search` yang tidak terpakai dari `@phosphor-icons/react` pada `AdminLayout.jsx` karena dalam library Phosphor, ikon pencarian sebenarnya bernama `MagnifyingGlass`, yang memicu error saat rendering runtime.
+- **File yang terdampak:** `resources/js/Layouts/AdminLayout.jsx`
+
 ### [30 Juni 2026] - Kerangka AdminLayout Sidebar & Setup Akun Seeder
 - **Apa yang dilakukan:**
   1. Membuat komponen layout khusus admin baru (**AdminLayout.jsx**) yang menggunakan navigasi bilah sisi (*sidebar*) berestetika gelap premium (collapsible di mobile, dilengkapi logo code bracket, panel kontrol navigasi, badge live status, dan kartu info profil admin di bagian bawah).
