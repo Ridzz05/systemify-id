@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useForm } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AppLayout from '@/Layouts/AppLayout';
 import { 
@@ -197,7 +198,11 @@ export default function Welcome() {
     const [playgroundBadges, setPlaygroundBadges] = useState(['Custom Code', 'Tailwind v4', 'React 19']);
     const [badgeInput, setBadgeInput] = useState('');
     const [contactSubmitted, setContactSubmitted] = useState(false);
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const { data: formData, setData: setFormData, post, processing, reset } = useForm({
+        name: '',
+        email: '',
+        message: '',
+    });
 
     // Card stack shuffling states for Hero section
     const [heroActiveCard, setHeroActiveCard] = useState('blue'); // 'blue' or 'lime'
@@ -226,9 +231,13 @@ export default function Welcome() {
 
     const handleContactSubmit = (e) => {
         e.preventDefault();
-        if (formData.name && formData.email && formData.message) {
-            setContactSubmitted(true);
-        }
+        post(route('briefs.store'), {
+            preserveScroll: true,
+            onSuccess: () => {
+                setContactSubmitted(true);
+                reset();
+            }
+        });
     };
 
     const containerVariants = {
@@ -798,9 +807,14 @@ export default function Welcome() {
 
                             <button 
                                 type="submit"
-                                className="w-full py-4 bg-brand-lime text-brand-dark font-extrabold rounded-full text-base hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 shadow-[0_4px_25px_rgba(181,255,0,0.25)] flex items-center justify-center gap-2"
+                                disabled={processing}
+                                className={`w-full py-4 bg-brand-lime text-brand-dark font-extrabold rounded-full text-base transition-all duration-200 shadow-[0_4px_25px_rgba(181,255,0,0.25)] flex items-center justify-center gap-2 ${
+                                    processing 
+                                        ? 'opacity-50 cursor-not-allowed' 
+                                        : 'hover:scale-[1.03] active:scale-[0.97]'
+                                }`}
                             >
-                                Send Project Brief <PaperPlaneRight className="w-4 h-4" weight="bold" />
+                                {processing ? 'Sending...' : 'Send Project Brief'} <PaperPlaneRight className="w-4 h-4" weight="bold" />
                             </button>
                         </form>
                     )}
