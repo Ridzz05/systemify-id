@@ -53,7 +53,7 @@ export default function AppLayout({
 
                 {/* Header Navigation */}
                 {showNav && (
-                    <header className="relative w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between z-50">
+                    <header className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl px-6 py-4 flex items-center justify-between z-50 bg-brand-dark/30 backdrop-blur-md border-b border-white/5">
                         <Link href="/" className="flex items-center gap-2 group">
                             {/* Logo: code bracket mark — identitas teknis, bukan letter S biasa */}
                             <span className="w-8 h-8 rounded-xl bg-brand-lime flex items-center justify-center text-brand-dark font-black text-sm shadow-lg group-hover:rotate-6 transition-transform duration-300 tracking-tighter font-mono select-none">
