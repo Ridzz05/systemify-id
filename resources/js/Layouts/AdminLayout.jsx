@@ -11,7 +11,6 @@ import {
     House, 
     List, 
     X, 
-    Search, 
     Circle, 
     User,
     Shield
