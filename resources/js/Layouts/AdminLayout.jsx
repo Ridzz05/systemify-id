@@ -167,12 +167,6 @@ export default function AdminLayout({ children, activeTab = 'overview', title = 
                             <List className="w-5 h-5" weight="bold" />
                         </button>
 
-                        <div className="hidden sm:flex items-center gap-2 text-xs font-bold text-white/50 bg-white/5 border border-white/10 rounded-full px-4 py-1.5">
-                            <Circle className="w-2.5 h-2.5 fill-brand-lime animate-pulse text-brand-lime" weight="fill" />
-                            <span>System: Operational</span>
-                            <span className="text-white/20">//</span>
-                            <span className="text-brand-lime">Live Build v1.0.3</span>
-                        </div>
                     </div>
 
                     {/* Right utilities */}
