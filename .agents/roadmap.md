@@ -27,6 +27,13 @@ Setiap agen yang menyelesaikan tugas terstruktur (membuat fitur baru, mengubah a
 
 ## 🚀 Changelog & Checkpoints
 
+### [30 Juni 2026] - Implementasi Native CSS Scroll Snap System
+- **Apa yang dilakukan:**
+  1. Mengimplementasikan sistem scroll snapping layar penuh berbasis CSS native (`scroll-snap-type: y mandatory`) yang sangat halus dan diakselerasi perangkat keras pada level root container (`.scroll-container` di `AppLayout.jsx` & `app.css`).
+  2. Menyelaraskan seluruh 5 section halaman landing di `Welcome.jsx` agar menggunakan kelas `.snap-section` (`scroll-snap-align: start`, `scroll-snap-stop: always`) dan menyesuaikan tinggi minimumnya menjadi layar penuh (`min-h-screen`) dengan pemosisian konten terpusat vertikal (`flex/grid items-center`).
+  3. Mengonfigurasi elemen global `footer` agar menggunakan snapping terpasang (`scroll-snap-align: end`) di akhir dokumen agar meluncur masuk dan terkunci pas di dasar layar.
+- **File yang terdampak:** `resources/css/app.css`, `resources/js/Layouts/AppLayout.jsx`, `resources/js/Pages/Welcome.jsx`
+
 ### [30 Juni 2026] - Integrasi Framer Motion & Animasi Scroll/Sticker Dinamis
 - **Apa yang dilakukan:**
   1. Menginstal library `framer-motion` untuk mendukung sistem animasi React 19 native.
