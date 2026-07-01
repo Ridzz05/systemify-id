@@ -14,6 +14,12 @@ Proyek ini adalah aplikasi **Monolith Modern**.
   - `resources/js/components/` -> Berisi komponen UI yang reusable (termasuk dari shadcn).
   - `app/Http/Controllers/` -> Logika bisnis backend.
 
+## 📅 Rencana Pengerjaan Berikutnya (To-Do List)
+*   **Halaman Admin & System Dashboard:**
+    *   Mendesain ulang halaman pasca-login (`Dashboard.jsx`) untuk diubah menjadi sistem Dashboard Admin terpadu.
+    *   Menyesuaikan tema visual dashboard dengan gaya gelap premium (`brand-dark`, `brand-lime` accent, `brand-glow`) agar senada dengan halaman landing Welcome.
+    *   Memastikan navigasi dashboard dan layout otentikasi (`Login.jsx`, `Register.jsx`) mematuhi standar kegelapan, tipografi, dan interaksi kursor kustom global.
+
 ## 📝 Aturan Update Checkpoint
 Setiap agen yang menyelesaikan tugas terstruktur (membuat fitur baru, mengubah alur sistem, menambah dependensi, dll) **WAJIB** menambahkan log ke bagian bawah file ini.
 
