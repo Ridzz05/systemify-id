@@ -27,6 +27,16 @@ Setiap agen yang menyelesaikan tugas terstruktur (membuat fitur baru, mengubah a
 
 ## 🚀 Changelog & Checkpoints
 
+### [30 Juni 2026] - Kerangka AdminLayout Sidebar & Setup Akun Seeder
+- **Apa yang dilakukan:**
+  1. Membuat komponen layout khusus admin baru (**AdminLayout.jsx**) yang menggunakan navigasi bilah sisi (*sidebar*) berestetika gelap premium (collapsible di mobile, dilengkapi logo code bracket, panel kontrol navigasi, badge live status, dan kartu info profil admin di bagian bawah).
+  2. Menghubungkan halaman **Dashboard.jsx** utama agar dibungkus dengan `AdminLayout` baru ini, menyinkronkan status tab aktif serta header konsol root.
+  3. Memperbarui berkas **DatabaseSeeder.php** agar otomatis menyuntikkan (*seeding*) akun administrator berhak akses penuh:
+     *   **Email:** `admin@systemify.id`
+     *   **Password:** `password`
+  4. Menjalankan *fresh migration* dan *seeding* database (`php artisan migrate:fresh --seed`) untuk mereset dan mengisi database SQLite lokal secara bersih.
+- **File yang terdampak:** `database/seeders/DatabaseSeeder.php`, `resources/js/Layouts/AdminLayout.jsx`, `resources/js/Pages/Dashboard.jsx`
+
 ### [30 Juni 2026] - Redesain Dashboard Admin & Halaman Autentikasi Premium
 - **Apa yang dilakukan:**
   1. Merombak total **AuthenticatedLayout.jsx** dengan menambahkan *noise texture overlay*, *custom LERP cursor*, *ambient glow*, dan *floating pill-shaped navbar* pada desktop agar selaras dengan nuansa premium landing page.
