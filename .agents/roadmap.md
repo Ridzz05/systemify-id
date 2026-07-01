@@ -27,6 +27,15 @@ Setiap agen yang menyelesaikan tugas terstruktur (membuat fitur baru, mengubah a
 
 ## 🚀 Changelog & Checkpoints
 
+### [30 Juni 2026] - Integrasi Framer Motion & Animasi Scroll/Sticker Dinamis
+- **Apa yang dilakukan:**
+  1. Menginstal library `framer-motion` untuk mendukung sistem animasi React 19 native.
+  2. Menerapkan **Staggered Entrance Animation** pada kolom kiri Hero (Tagline, Heading, Deskripsi, CTA, dan Metrics bar) sehingga memudar ke atas secara bertahap saat pertama kali dimuat menggunakan custom bezier easing.
+  3. Menerapkan animasi skala masuk (`scale: 0.96` -> `1`, `delay: 0.35`) pada tumpukan kartu poker interaktif Hero sebelah kanan.
+  4. Menambahkan **Viewport Triggered Animations** (`whileInView`, `viewport={{ once: true, margin: "-50px" }}`) pada header section Methodology, 4 kartu Bento Grid, 3 kartu keuntungan About, dan formulir panel Contact sehingga meluncur naik dengan halus saat tersentuh scroll.
+  5. Mengimplementasikan transisi `<AnimatePresence>` dan `<motion.span>` pada sticker badges di Playground (baik render preview kartu maupun panel edit customizer) agar badge yang ditambah/dihapus memudar dan menyusut secara organis menggunakan layout transitions.
+- **File yang terdampak:** `package.json`, `package-lock.json`, `resources/js/Pages/Welcome.jsx`
+
 ### [30 Juni 2026] - Custom Cursor Follower dengan LERP (Linear Interpolation)
 - **Apa yang dilakukan:**
   1. Mengimplementasikan fitur **Custom Cursor Follower** premium di desktop/webview (tersembunyi secara otomatis di perangkat mobile/tablet dengan lebar layar < 768px).
