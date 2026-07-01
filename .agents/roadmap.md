@@ -27,6 +27,14 @@ Setiap agen yang menyelesaikan tugas terstruktur (membuat fitur baru, mengubah a
 
 ## 🚀 Changelog & Checkpoints
 
+### [30 Juni 2026] - Redesain Dashboard Admin & Halaman Autentikasi Premium
+- **Apa yang dilakukan:**
+  1. Merombak total **AuthenticatedLayout.jsx** dengan menambahkan *noise texture overlay*, *custom LERP cursor*, *ambient glow*, dan *floating pill-shaped navbar* pada desktop agar selaras dengan nuansa premium landing page.
+  2. Merancang ulang halaman **Dashboard.jsx** menjadi visual konsol developer/sistem real-time, menampilkan status basis data SQLite, compiler Vite, backend Laravel, daemon Open Design, status pipelines, dan linimasa Git commit aktivitas terbaru.
+  3. Mengubah layout autentikasi (**GuestLayout.jsx**) ke tema gelap premium lengkap dengan pendaran latar belakang hijau neon dan logo *centered* yang elegan.
+  4. Menyelaraskan seluruh kontrol formulir bawaan (**TextInput.jsx**, **Checkbox.jsx**, **PrimaryButton.jsx**, **InputLabel.jsx**, **NavLink.jsx**, **ResponsiveNavLink.jsx**) ke visual konsol kustom kita (misalnya label berhuruf tebal uppercase, tombol hijau lime dengan hover scale, border masukan glow-on-focus).
+- **File yang terdampak:** `resources/js/Components/Checkbox.jsx`, `resources/js/Components/InputLabel.jsx`, `resources/js/Components/NavLink.jsx`, `resources/js/Components/PrimaryButton.jsx`, `resources/js/Components/ResponsiveNavLink.jsx`, `resources/js/Components/TextInput.jsx`, `resources/js/Layouts/AuthenticatedLayout.jsx`, `resources/js/Layouts/GuestLayout.jsx`, `resources/js/Pages/Auth/Login.jsx`, `resources/js/Pages/Dashboard.jsx`
+
 ### [30 Juni 2026] - Implementasi Native CSS Scroll Snap System & Floating Header Fix
 - **Apa yang dilakukan:**
   1. Mengimplementasikan sistem scroll snapping layar penuh berbasis CSS native (`scroll-snap-type: y mandatory`) yang sangat halus dan diakselerasi perangkat keras pada level root container (`.scroll-container` di `AppLayout.jsx` & `app.css`).
