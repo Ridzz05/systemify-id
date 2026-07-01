@@ -144,7 +144,7 @@ export default function AppLayout({
     );
 }
 
-function CustomCursor() {
+export function CustomCursor() {
     const dotRef = useRef(null);
     const ringRef = useRef(null);
     const mouseCoords = useRef({ x: -100, y: -100 });
