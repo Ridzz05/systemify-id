@@ -1,12 +1,10 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import AdminLayout from '@/Layouts/AdminLayout';
 import { Head } from '@inertiajs/react';
 import { Database, Lightning, Cpu, GitBranch, Circle, Terminal, ArrowRight, Gear, CheckCircle } from '@phosphor-icons/react';
 
 export default function Dashboard() {
     return (
-        <AuthenticatedLayout
-            header="System status // live engine console"
-        >
+        <AdminLayout activeTab="overview" title="Console Overview">
             <Head title="System Dashboard" />
 
             <div className="flex flex-col gap-8">
@@ -188,6 +186,6 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AdminLayout>
     );
 }
