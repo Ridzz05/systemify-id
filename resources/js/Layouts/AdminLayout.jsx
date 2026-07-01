@@ -127,26 +127,20 @@ export default function AdminLayout({ children, activeTab = 'overview', title = 
                     </div>
                 </div>
 
-                {/* Sidebar Footer User Card */}
-                <div className="p-4 border-t border-white/5 bg-black/20 flex flex-col gap-3">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative select-none">
-                            <Shield className="w-5 h-5 text-brand-lime" weight="bold" />
-                            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-brand-lime border-2 border-brand-dark" />
-                        </div>
-                        <div className="flex flex-col min-w-0">
-                            <span className="text-xs font-black text-white truncate">{user.name}</span>
-                            <span className="text-[9px] font-bold text-white/40 uppercase tracking-widest truncate">System Admin</span>
-                        </div>
+                {/* Sidebar Footer */}
+                <div className="p-5 border-t border-white/5 flex items-center justify-between text-xs relative z-10">
+                    <div className="flex flex-col min-w-0">
+                        <span className="font-bold text-white truncate">{user.name}</span>
+                        <span className="text-[10px] text-white/40 truncate mt-0.5">{user.email}</span>
                     </div>
-
                     <Link
                         href={route('logout')}
                         method="post"
                         as="button"
-                        className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-white/5 bg-white/5 text-[10px] font-black uppercase tracking-wider text-red-400 hover:bg-red-500/10 hover:border-red-500/20 hover:text-red-300 transition-all duration-200"
+                        className="p-2 rounded-lg hover:bg-red-500/10 text-white/40 hover:text-red-400 transition-colors shrink-0"
+                        title="Log Out"
                     >
-                        <SignOut className="w-3.5 h-3.5" weight="bold" /> Log Out
+                        <SignOut className="w-4 h-4" weight="bold" />
                     </Link>
                 </div>
             </aside>
