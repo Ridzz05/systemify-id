@@ -260,8 +260,8 @@ export default function Welcome() {
             containerClassName="w-full relative" // override to let child page control internal container styling
         >
             {/* Hero Section */}
-            {/* Masalah 4 fix: pb-[280px] pada mobile memberi ruang untuk dua kartu absolute yang overflow ke bawah */}
-            <section className="brand-section brand-section-transparent max-w-7xl mx-auto px-6 pt-12 pb-[280px] md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Masalah 4 fix: pb-[280px] diganti dengan min-h-screen agar seimbang dalam scroll snap */}
+            <section className="snap-section brand-section brand-section-transparent max-w-7xl mx-auto px-6 min-h-screen grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <motion.div 
                     variants={containerVariants}
                     initial="hidden"
@@ -389,7 +389,7 @@ export default function Welcome() {
             </section>
 
             {/* Services Section */}
-            <section id="services" className="brand-section brand-section-subtle">
+            <section id="services" className="snap-section brand-section brand-section-subtle min-h-screen flex items-center w-full">
                 <div className="max-w-7xl mx-auto px-6">
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
@@ -522,7 +522,7 @@ export default function Welcome() {
             </section>
 
             {/* Playground Section */}
-            <section id="playground" className="brand-section brand-section-transparent">
+            <section id="playground" className="snap-section brand-section brand-section-transparent min-h-screen flex items-center w-full">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                         <div className="lg:col-span-7 flex flex-col gap-6 brand-panel">
@@ -648,7 +648,7 @@ export default function Welcome() {
         </section>
 
             {/* About/Difference Section */}
-            <section id="about" className="brand-section brand-section-subtle">
+            <section id="about" className="snap-section brand-section brand-section-subtle min-h-screen flex items-center w-full">
                 <div className="max-w-7xl mx-auto px-6 text-center">
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
@@ -722,7 +722,7 @@ export default function Welcome() {
             </section>
 
             {/* Contact Form Section */}
-            <section id="contact" className="brand-section brand-section-transparent">
+            <section id="contact" className="snap-section brand-section brand-section-transparent min-h-screen flex items-center w-full">
                 <div className="max-w-7xl mx-auto px-6 relative">
                     <motion.div 
                         initial={{ opacity: 0, scale: 0.96, y: 30 }}

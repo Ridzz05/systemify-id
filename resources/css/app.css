@@ -273,6 +273,28 @@
     }
 }
 
+/* Native CSS Scroll Snap System */
+.scroll-container {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
+}
+
+.snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Ensure the footer snaps nicely at the end */
+footer {
+    scroll-snap-align: end;
+}
+
 /* Force global font stack across all elements (including form inputs & buttons) */
 html, body, button, input, select, textarea {
     font-family: 'Outfit', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;

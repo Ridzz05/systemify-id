@@ -22,7 +22,7 @@ export default function AppLayout({
             </Head>
 
             {/* Visual Shell */}
-            <div className="min-h-screen bg-brand-dark text-white font-sans selection:bg-brand-lime selection:text-brand-dark relative overflow-x-hidden">
+            <div className="scroll-container bg-brand-dark text-white font-sans selection:bg-brand-lime selection:text-brand-dark relative overflow-x-hidden">
                 
                 {/* === BACKGROUND SYSTEM ===
                      Filosofi: Atmosfer brand yang proporsional dan performant.
