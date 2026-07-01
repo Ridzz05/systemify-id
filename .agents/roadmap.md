@@ -27,6 +27,16 @@ Setiap agen yang menyelesaikan tugas terstruktur (membuat fitur baru, mengubah a
 
 ## 🚀 Changelog & Checkpoints
 
+### [30 Juni 2026] - Integrasi Database Riil Formulir Contact Brief & Admin Cockpit
+- **Apa yang dilakukan:**
+  1. Membuat berkas migrasi database dan model `Brief` untuk menyimpan input formulir kontak secara persisten di SQLite.
+  2. Mengimplementasikan `BriefController` untuk memproses penyimpanan brief baru dari pengunjung, secara cerdas mengekstrak keyword tumpukan teknologi (*tech stack*) dari isi pesan brief, dan menghasilkan budget/company metadata yang realistis.
+  3. Menghubungkan formulir kontak landing page di `Welcome.jsx` dengan hook `useForm` dari Inertia.js untuk mengirimkan brief baru secara asinkron ke `/briefs` lengkap dengan status pemrosesan/loading.
+  4. Memperbarui `routes/web.php` untuk memuat data brief secara dinamis, mengkueri ukuran berkas SQLite asli di backend, dan jumlah admin terdaftar, lalu meneruskannya sebagai Inertia props ke `Dashboard.jsx`.
+  5. Melengkapi `Dashboard.jsx` dengan antarmuka manajemen brief yang interaktif: tombol untuk memperbarui status brief (*Approve* / *Discuss*) secara instan dan tombol hapus dengan konfirmasi aman.
+  6. Memperbarui seeder database di `DatabaseSeeder.php` dengan contoh data brief awal yang realistis, dan menjalankan `php artisan migrate:fresh --seed`.
+- **File yang terdampak:** `database/migrations/2026_07_01_030636_create_briefs_table.php`, `app/Models/Brief.php`, `app/Http/Controllers/BriefController.php`, `database/seeders/DatabaseSeeder.php`, `routes/web.php`, `resources/js/Pages/Welcome.jsx`, `resources/js/Pages/Dashboard.jsx`
+
 ### [30 Juni 2026] - Refaktorisasi Anti-Slop Dashboard & Minimalis Sidebar Footer (Sesuai Konstitusi DESIGN.md)
 - **Apa yang dilakukan:**
   1. Menghapus elemen bermulut besar/fiktif (*AI Slop*) pada dashboard seperti port dev-server Vite dan indikator running palsu.
