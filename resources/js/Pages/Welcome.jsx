@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import AppLayout from '@/Layouts/AppLayout';
 import { 
     Heart, 
@@ -112,30 +113,37 @@ function InstagramCard({
                 {/* Badges Container */}
                 {badges.length > 0 && (
                     <div className="flex flex-wrap gap-2 pt-1" onClick={(e) => e.stopPropagation()}>
-                        {badges.map((badge, idx) => {
-                            const isOdd = idx % 2 === 1;
-                            let badgeStyle = '';
-                            
-                            if (isBlue) {
-                                badgeStyle = isOdd 
-                                    ? 'bg-brand-lime text-brand-dark' 
-                                    : 'bg-white text-brand-dark';
-                            } else {
-                                badgeStyle = isOdd 
-                                    ? 'bg-brand-blue text-white' 
-                                    : 'bg-white text-brand-dark border border-brand-dark/15';
-                            }
+                        <AnimatePresence>
+                            {badges.map((badge, idx) => {
+                                const isOdd = idx % 2 === 1;
+                                let badgeStyle = '';
+                                
+                                if (isBlue) {
+                                    badgeStyle = isOdd 
+                                        ? 'bg-brand-lime text-brand-dark' 
+                                        : 'bg-white text-brand-dark';
+                                } else {
+                                    badgeStyle = isOdd 
+                                        ? 'bg-brand-blue text-white' 
+                                        : 'bg-white text-brand-dark border border-brand-dark/15';
+                                }
 
-                            return (
-                                <span 
-                                    key={idx}
-                                    className={`inline-flex items-center gap-1 bg-white font-bold px-3 py-1.5 rounded-full text-xs shadow-sm hover:-translate-y-0.5 hover:rotate-1 transition-all duration-200 cursor-default ${badgeStyle}`}
-                                >
-                                    {isOdd ? <Sparkle className="w-3.5 h-3.5" weight="bold" /> : <Check className="w-3.5 h-3.5" weight="bold" />}
-                                    {badge}
-                                </span>
-                            );
-                        })}
+                                return (
+                                    <motion.span 
+                                        key={badge}
+                                        initial={{ opacity: 0, scale: 0.85, y: 5 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.85, y: -5 }}
+                                        transition={{ duration: 0.25, ease: "easeOut" }}
+                                        layout
+                                        className={`inline-flex items-center gap-1 bg-white font-bold px-3 py-1.5 rounded-full text-xs shadow-sm hover:-translate-y-0.5 hover:rotate-1 transition-all duration-200 cursor-default ${badgeStyle}`}
+                                    >
+                                        {isOdd ? <Sparkle className="w-3.5 h-3.5" weight="bold" /> : <Check className="w-3.5 h-3.5" weight="bold" />}
+                                        {badge}
+                                    </motion.span>
+                                );
+                            })}
+                        </AnimatePresence>
                     </div>
                 )}
 
@@ -223,6 +231,29 @@ export default function Welcome() {
         }
     };
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.05
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    };
+
     return (
         <AppLayout 
             title="Welcome" 
@@ -231,29 +262,46 @@ export default function Welcome() {
             {/* Hero Section */}
             {/* Masalah 4 fix: pb-[280px] pada mobile memberi ruang untuk dua kartu absolute yang overflow ke bawah */}
             <section className="brand-section brand-section-transparent max-w-7xl mx-auto px-6 pt-12 pb-[280px] md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div className="lg:col-span-7 flex flex-col items-start text-left gap-6">
+                <motion.div 
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="lg:col-span-7 flex flex-col items-start text-left gap-6"
+                >
                     {/* Tagline Badge */}
-                    <div className="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-full px-3.5 py-1.5 hover:bg-white/[0.08] hover:border-brand-blue/30 transition-all duration-300 select-none">
+                    <motion.div 
+                        variants={itemVariants} 
+                        className="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-full px-3.5 py-1.5 hover:bg-white/[0.08] hover:border-brand-blue/30 transition-all duration-300 select-none"
+                    >
                         <span className="bg-brand-lime text-brand-dark font-black text-[9px] px-2 py-0.5 rounded uppercase tracking-widest">
                             NEW AGE
                         </span>
                         <span className="text-xs text-white/80 font-medium flex items-center gap-1.5">
                             Modern Laravel + React Architecture <ArrowRight className="w-3.5 h-3.5 text-brand-lime" weight="bold" />
                         </span>
-                    </div>
+                    </motion.div>
 
                     {/* Heading */}
-                    <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] text-white">
+                    <motion.h1 
+                        variants={itemVariants}
+                        className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] text-white"
+                    >
                         We build <span className="font-serif italic font-normal text-brand-lime">digital systems</span> that scale your business.
-                    </h1>
+                    </motion.h1>
 
                     {/* Description */}
-                    <p className="text-lg md:text-xl text-white/70 leading-relaxed max-w-xl">
+                    <motion.p 
+                        variants={itemVariants}
+                        className="text-lg md:text-xl text-white/70 leading-relaxed max-w-xl"
+                    >
                         We architect Laravel + React systems with Inertia as the bridge — no separate API, no context switching. Every pixel is a deliberate decision.
-                    </p>
+                    </motion.p>
 
                     {/* Call To Actions — Sesuai dengan DESIGN.md Primary & Secondary CTAs */}
-                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2">
+                    <motion.div 
+                        variants={itemVariants}
+                        className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2"
+                    >
                         <a
                             href="#contact"
                             className="px-8 py-4 bg-brand-lime text-brand-dark font-extrabold rounded-full text-base flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 shadow-[0_4px_25px_rgba(181,255,0,0.25)]"
@@ -266,10 +314,13 @@ export default function Welcome() {
                         >
                             Try Card Builder <CursorClick className="w-5 h-5 text-brand-lime" weight="bold" />
                         </a>
-                    </div>
+                    </motion.div>
 
                     {/* Metrics Bar — Redesigned into a premium dashboard grid panel */}
-                    <div className="grid grid-cols-3 gap-4 border-t border-white/10 pt-8 mt-4 w-full max-w-md">
+                    <motion.div 
+                        variants={itemVariants}
+                        className="grid grid-cols-3 gap-4 border-t border-white/10 pt-8 mt-4 w-full max-w-md"
+                    >
                         <div className="flex flex-col gap-1 border-r border-white/5 pr-4">
                             <span className="text-3xl font-black text-white tracking-tight leading-none">10x</span>
                             <span className="text-[10px] text-white/40 font-bold uppercase tracking-widest leading-tight">Speed boost</span>
@@ -282,11 +333,16 @@ export default function Welcome() {
                             <span className="text-3xl font-black text-white tracking-tight leading-none">3.2x</span>
                             <span className="text-[10px] text-white/40 font-bold uppercase tracking-widest leading-tight">Conversion</span>
                         </div>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
 
                 {/* Overlapping Interactive Instagram-style Cards (Poker Deck Shuffle style) */}
-                <div className="lg:col-span-5 flex flex-col items-center justify-center relative min-h-[520px] w-full mt-12 lg:mt-0">
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.96, y: 24 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+                    className="lg:col-span-5 flex flex-col items-center justify-center relative min-h-[520px] w-full mt-12 lg:mt-0"
+                >
                     
                     {/* Floating Instruction sticker */}
                     <div className="absolute top-[34%] left-[-8%] hidden xl:block z-30 pointer-events-none select-none">
@@ -329,13 +385,19 @@ export default function Welcome() {
                     <span className="text-[10px] text-white/30 uppercase tracking-widest font-black mt-4 block xl:hidden">
                         Tap card to swap / shuffle
                     </span>
-                </div>
+                </motion.div>
             </section>
 
             {/* Services Section */}
             <section id="services" className="brand-section brand-section-subtle">
                 <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4"
+                    >
                         <div className="flex flex-col items-start gap-4">
                             <span className="bg-brand-blue text-white font-extrabold text-xs px-3 py-1.5 rounded-full uppercase tracking-wider">
                                 Our Methodology
@@ -347,13 +409,19 @@ export default function Welcome() {
                         <p className="text-white/60 max-w-md text-base leading-relaxed">
                             We don't use generic boilerplates. We engineer tailored code architectures from the ground up to solve your unique business challenges.
                         </p>
-                    </div>
+                    </motion.div>
 
                     {/* Bento Grid — asimetris, bukan 4 kartu identik */}
                     <div className="grid grid-cols-1 md:grid-cols-6 gap-4 lg:gap-5">
 
                         {/* [1] Featured Card — Laravel + React via Inertia (lebar 4 kolom) */}
-                        <div className="md:col-span-4 brand-card hover:border-brand-blue/40 flex flex-col justify-between group min-h-[260px]">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                            className="md:col-span-4 brand-card hover:border-brand-blue/40 flex flex-col justify-between group min-h-[260px]"
+                        >
                             <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-brand-blue/10 blur-2xl group-hover:bg-brand-blue/20 transition-all" />
                             <div className="flex flex-col gap-4 z-10">
                                 <div className="flex items-center gap-3">
@@ -372,10 +440,16 @@ export default function Welcome() {
                             <span className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-lime mt-8 cursor-pointer z-10">
                                 Explore architecture <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" weight="bold" />
                             </span>
-                        </div>
+                        </motion.div>
 
                         {/* [2] Tailwind v4 — accent lime, kolom 2 */}
-                        <div className="md:col-span-2 brand-card-accent flex flex-col justify-between group">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                            className="md:col-span-2 brand-card-accent flex flex-col justify-between group"
+                        >
                             <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-brand-lime/15 blur-xl group-hover:bg-brand-lime/25 transition-all" />
                             <div className="flex flex-col gap-4 z-10">
                                 <div className="brand-icon-box text-brand-lime">
@@ -391,10 +465,16 @@ export default function Welcome() {
                             <span className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-lime mt-6 cursor-pointer z-10">
                                 See the stylesheet <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" weight="bold" />
                             </span>
-                        </div>
+                        </motion.div>
 
                         {/* [3] Design Systems — kolom 2 (kecil) */}
-                        <div className="md:col-span-2 brand-card hover:border-brand-blue/30 flex flex-col justify-between group">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                            className="md:col-span-2 brand-card hover:border-brand-blue/30 flex flex-col justify-between group"
+                        >
                             <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-brand-blue/10 blur-xl group-hover:bg-brand-blue/20 transition-all" />
                             <div className="flex flex-col gap-4 z-10">
                                 <div className="brand-icon-box brand-icon-box-blue text-brand-blue">
@@ -410,10 +490,16 @@ export default function Welcome() {
                             <span className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-lime mt-6 cursor-pointer z-10">
                                 See components <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" weight="bold" />
                             </span>
-                        </div>
+                        </motion.div>
 
                         {/* [4] Animations & FX — lebar 4 kolom, horizontal layout */}
-                        <div className="md:col-span-4 brand-card flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 group hover:border-brand-lime/20">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                            className="md:col-span-4 brand-card flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 group hover:border-brand-lime/20"
+                        >
                             <div className="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-brand-lime/8 blur-2xl group-hover:bg-brand-lime/15 transition-all" />
                             <div className="flex flex-col gap-4 z-10">
                                 <div className="brand-icon-box text-brand-lime">
@@ -429,7 +515,7 @@ export default function Welcome() {
                             <span className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-lime whitespace-nowrap cursor-pointer z-10 shrink-0">
                                 Try interactions <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" weight="bold" />
                             </span>
-                        </div>
+                        </motion.div>
 
                     </div>
                 </div>
@@ -501,16 +587,23 @@ export default function Welcome() {
                             <div className="flex flex-col gap-2">
                                 <label className="text-xs font-bold text-white/40 uppercase tracking-widest">Sticker Badges (Max 4)</label>
                                 <div className="flex flex-wrap gap-2 mb-2">
-                                    {playgroundBadges.map((badge, idx) => (
-                                        <span 
-                                            key={idx}
-                                            onClick={() => handleRemoveBadge(idx)}
-                                            className="bg-brand-lime/10 text-brand-lime hover:bg-red-500 hover:text-white border border-brand-lime/20 hover:border-red-500 px-3.5 py-1.5 rounded-full text-xs font-bold cursor-pointer transition-colors flex items-center gap-1.5"
-                                            title="Click to remove"
-                                        >
-                                            {badge} <span className="text-[9px]">✕</span>
-                                        </span>
-                                    ))}
+                                    <AnimatePresence>
+                                        {playgroundBadges.map((badge, idx) => (
+                                            <motion.span 
+                                                key={badge}
+                                                initial={{ opacity: 0, scale: 0.85 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                exit={{ opacity: 0, scale: 0.85 }}
+                                                transition={{ duration: 0.2 }}
+                                                layout
+                                                onClick={() => handleRemoveBadge(idx)}
+                                                className="bg-brand-lime/10 text-brand-lime hover:bg-red-500 hover:text-white border border-brand-lime/20 hover:border-red-500 px-3.5 py-1.5 rounded-full text-xs font-bold cursor-pointer transition-colors flex items-center gap-1.5"
+                                                title="Click to remove"
+                                            >
+                                                {badge} <span className="text-[9px]">✕</span>
+                                            </motion.span>
+                                        ))}
+                                    </AnimatePresence>
                                 </div>
 
                                 {playgroundBadges.length < 4 && (
@@ -557,7 +650,13 @@ export default function Welcome() {
             {/* About/Difference Section */}
             <section id="about" className="brand-section brand-section-subtle">
                 <div className="max-w-7xl mx-auto px-6 text-center">
-                    <div className="max-w-2xl mx-auto flex flex-col gap-4 mb-16">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="max-w-2xl mx-auto flex flex-col gap-4 mb-16"
+                    >
                         <span className="text-brand-lime text-xs font-black uppercase tracking-widest">Why Choose systemify.id</span>
                         <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
                             Monolithic speed, <span className="font-serif italic font-normal text-brand-lime">premium visual language</span>
@@ -565,10 +664,16 @@ export default function Welcome() {
                         <p className="text-white/70">
                             We believe web applications should look like highly curated magazine layouts, feel fluid, and require zero page-reload latency.
                         </p>
-                    </div>
+                    </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                        <div className="brand-card flex flex-col gap-4">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                            className="brand-card flex flex-col gap-4"
+                        >
                             <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-brand-lime/8 blur-xl" />
                             <div className="w-10 h-10 rounded-full bg-brand-lime text-brand-dark flex items-center justify-center font-extrabold z-10">
                                 01
@@ -577,9 +682,15 @@ export default function Welcome() {
                             <p className="text-sm text-white/70 leading-relaxed">
                                 Using InertiaJS, we bridge your Laravel server routes directly to React components. The result? No client APIs to write, and instantaneous page switching.
                             </p>
-                        </div>
+                        </motion.div>
 
-                        <div className="brand-card flex flex-col gap-4">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                            className="brand-card flex flex-col gap-4"
+                        >
                             <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-brand-blue/8 blur-xl" />
                             <div className="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center font-extrabold z-10">
                                 02
@@ -588,9 +699,15 @@ export default function Welcome() {
                             <p className="text-sm text-white/70 leading-relaxed">
                                 Every component is loaded with subtle physics animations, physical stickers, tactile shadows, and neon gradients to ensure your brand leaves an unforgettable impression.
                             </p>
-                        </div>
+                        </motion.div>
 
-                        <div className="brand-card flex flex-col gap-4">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                            className="brand-card flex flex-col gap-4"
+                        >
                             <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-white/5 blur-xl" />
                             <div className="w-10 h-10 rounded-full bg-white text-brand-dark flex items-center justify-center font-extrabold z-10">
                                 03
@@ -599,7 +716,7 @@ export default function Welcome() {
                             <p className="text-sm text-white/70 leading-relaxed">
                                 React 19, Tailwind v4, Laravel 13, Vite 8 — each chosen because it solves a real problem in the chain. They interoperate in ways a generic boilerplate never achieves.
                             </p>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>
@@ -607,7 +724,13 @@ export default function Welcome() {
             {/* Contact Form Section */}
             <section id="contact" className="brand-section brand-section-transparent">
                 <div className="max-w-7xl mx-auto px-6 relative">
-                    <div className="max-w-xl mx-auto brand-panel md:p-12 relative z-10">
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.96, y: 30 }}
+                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="max-w-xl mx-auto brand-panel md:p-12 relative z-10"
+                    >
                     <div className="text-center flex flex-col gap-3 mb-8">
                         <span className="text-brand-lime text-xs font-black uppercase tracking-widest">Connect with us</span>
                         <h3 className="text-3xl font-extrabold tracking-tight leading-tight">
@@ -681,7 +804,7 @@ export default function Welcome() {
                             </button>
                         </form>
                     )}
-                    </div>
+                    </motion.div>
                 </div>
             </section>
         </AppLayout>
