@@ -27,6 +27,16 @@ Setiap agen yang menyelesaikan tugas terstruktur (membuat fitur baru, mengubah a
 
 ## 🚀 Changelog & Checkpoints
 
+### [30 Juni 2026] - Refaktorisasi Anti-Slop Dashboard (Sesuai Konstitusi DESIGN.md)
+- **Apa yang dilakukan:**
+  1. Menghapus elemen bermulut besar/fiktif (*AI Slop*) pada dashboard seperti port dev-server Vite dan indikator running palsu.
+  2. Merancang ulang **Dashboard.jsx** menjadi *Agency Cockpit* yang otentik dan fungsional:
+     *   **Inbound Client Briefs:** Menampilkan daftar pengajuan briefs kustom yang masuk dari prospek klien nyata (nama, perusahaan, anggaran/budget spesifik, deskripsi kebutuhan teknis, tumpukan tech stack kustom, dan status peninjauan).
+     *   **Database & Engine Specs:** Audit ukuran berkas SQLite (`database.sqlite`), jumlah administrator terdaftar, serta spesifikasi detail runtime PHP 8.3 & Laravel 13.
+     *   **Security Audit Trail:** Log aktivitas keamanan internal yang bersih dan informatif.
+  3. Mematuhi aturan *anti-slop* visual: Menghilangkan semua efek transisi berdenyut (*pulse*) dekoratif murni dan gradien template generik.
+- **File yang terdampak:** `resources/js/Pages/Dashboard.jsx`
+
 ### [30 Juni 2026] - Perbaikan Eror Ekspor Ikon Search Phosphor
 - **Apa yang dilakukan:**
   *   Menghilangkan import `Search` yang tidak terpakai dari `@phosphor-icons/react` pada `AdminLayout.jsx` karena dalam library Phosphor, ikon pencarian sebenarnya bernama `MagnifyingGlass`, yang memicu error saat rendering runtime.
