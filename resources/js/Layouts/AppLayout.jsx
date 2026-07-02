@@ -42,10 +42,10 @@ export default function AppLayout({
                 <div className="brand-glow bottom-[15%] right-[-10vw] w-[40vw] h-[400px] bg-brand-lime/[0.06] blur-[120px]" />
 
                 {/* Side Rails — Rotated brand text on the right/left edges (Atelier Zero style) */}
-                <div className="hidden xl:flex side-rail left">
+                <div className="hidden 2xl:flex side-rail left">
                     <span className="rail-text">SYSTEMIFY.ID // DIGITAL SYSTEMS ARCHITECTURE</span>
                 </div>
-                <div className="hidden xl:flex side-rail right">
+                <div className="hidden 2xl:flex side-rail right">
                     <span className="rail-text">STATUS: ACTIVE // LIVE BUILD ENGINE</span>
                 </div>
                 {/* Custom Cursor follower */}
