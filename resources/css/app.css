@@ -98,44 +98,7 @@
     will-change: transform, filter;
 }
 
-/* Fixed side rails — rotated brand text on the right/left edges */
-.side-rail {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 48px;
-    z-index: 30;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-color: rgba(255, 255, 255, 0.03);
-}
 
-.side-rail.left {
-    left: 0;
-    border-right: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.side-rail.right {
-    right: 0;
-    border-left: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.rail-text {
-    font-family: var(--font-sans);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.08);
-    writing-mode: vertical-rl;
-    white-space: nowrap;
-}
-
-.side-rail.left .rail-text {
-    transform: rotate(180deg);
-}
 
 /* Unified Card Component */
 .brand-card {
