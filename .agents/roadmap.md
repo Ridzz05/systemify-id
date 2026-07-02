@@ -27,6 +27,16 @@ Setiap agen yang menyelesaikan tugas terstruktur (membuat fitur baru, mengubah a
 
 ## 🚀 Changelog & Checkpoints
 
+### [01 Juli 2026] - Refaktorisasi Layout, Scroll Snapping, & Kursor Kustom (Hasil Audit Subagent)
+- **Apa yang dilakukan:**
+  1. **Struktur Kontainer:** Memisahkan pembungkus grid internal Hero Section dari tag `<section>` luar di `Welcome.jsx` untuk menyelaraskan lebar border divider horizontal penuh dengan section lainnya.
+  2. **Audit Scroll Snapping:** Membatasi efek native CSS scroll snapping (`scroll-snap-type: y mandatory`) hanya pada lebar viewport desktop (`min-width: 1024px`) di `app.css`. Hal ini menyelesaikan masalah keterbacaan kritis pada mobile di mana konten tinggi yang melebihi 100vh memotong form masukan dan tumpukan kartu.
+  3. **Keamanan Kursor Kustom:** Membatasi penyembunyian kursor asli (`cursor: none`) hanya saat class `.has-custom-cursor` ditambahkan secara dinamis ke elemen `<html>` via JavaScript di `AppLayout.jsx`, mencegah hilangnya kursor jika JS gagal dimuat.
+  4. **Pembaruan Efek Hover & Klasifikasi Badges:** Menambahkan class `group` pada `InstagramCard` dan kartu About serta mengaktifkan transisi opacity pendaran glow dinamis saat hover. Membersihkan deklarasi ganda `bg-white` pada badging generator.
+  5. **Sinkronisasi Shuffling:** Mengurangi durasi transisi visual shuffle card di `app.css` menjadi `0.3s` agar selaras sempurna dengan timeout event handler React 300ms, menghilangkan jank/snap patah-patah di tengah jalan.
+  6. **Penyelarasan Tipografi & Aksen Tombol:** Memperbaiki kesalahan syntax `overflow-hidden` di `app.css`, menyelaraskan font-weight H2, H3, dan eyebrows, serta menstandarkan skala hover tombol Navigasi menjadi `hover:scale-[1.03] active:scale-[0.97]` sesuai `DESIGN.md`.
+- **File yang terdampak:** `resources/css/app.css`, `resources/js/Layouts/AppLayout.jsx`, `resources/js/Pages/Welcome.jsx`
+
 ### [30 Juni 2026] - Integrasi Database Riil Formulir Contact Brief & Admin Cockpit
 - **Apa yang dilakukan:**
   1. Membuat berkas migrasi database dan model `Brief` untuk menyimpan input formulir kontak secara persisten di SQLite.
