@@ -21,3 +21,10 @@ Aturan berikut wajib diikuti oleh setiap agent yang bekerja pada *workspace* ini
    - Copy voice & quality checklist
    
    Melanggar panduan di `DESIGN.md` dianggap sebagai output yang gagal, meskipun secara teknis kode berjalan dengan benar.
+
+4. **Protokol Mitosis (Orkestrasi Subagent):**
+   Jika mendapati tugas berskala besar yang memiliki pemisahan tanggung jawab yang jelas (seperti backend API vs. animasi frontend) atau kompleksitas riset yang tinggi, agen utama **sangat disarankan** memecah tugas tersebut dengan meluncurkan subagent spesialis (`define_subagent` & `invoke_subagent`). Subagent harus:
+   - Diberikan *system prompt* yang fokus (misal: *Backend API Architect* atau *Framer Motion Developer*).
+   - Mematuhi penuh aturan `.agents/AGENTS.md` dan `.agents/DESIGN.md`.
+   - Melaporkan hasil kerjanya secara modular ke agen utama sebelum dilakukan integrasi kode.
+
