@@ -74,10 +74,14 @@ function InstagramCard({
 
     return (
         <div 
-            className={`w-full max-w-[360px] aspect-[4/5] rounded-[24px] p-6 shadow-2xl border ${borderColor} flex flex-col justify-between relative overflow-hidden hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ease-out ${cardBg}`}
+            className={`w-full max-w-[360px] aspect-[4/5] rounded-[24px] p-6 shadow-2xl border ${borderColor} flex flex-col justify-between relative overflow-hidden hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ease-out group ${cardBg}`}
         >
             {/* Background Accent Gradients */}
-            <div className={`absolute -right-16 -top-16 w-32 h-32 rounded-full blur-2xl ${isBlue ? 'bg-brand-lime/20' : 'bg-brand-blue/20'}`} />
+            <div className={`absolute -right-16 -top-16 w-32 h-32 rounded-full blur-2xl transition-all duration-300 ${
+                isBlue 
+                    ? 'bg-brand-lime/10 group-hover:bg-brand-lime/25' 
+                    : 'bg-brand-blue/10 group-hover:bg-brand-blue/25'
+            }`} />
             
             {/* Card Header (Instagram Profile Style) */}
             <div className={`flex items-center gap-3 border-b ${borderDivider} pb-4 z-10`}>
@@ -137,7 +141,7 @@ function InstagramCard({
                                         exit={{ opacity: 0, scale: 0.85, y: -5 }}
                                         transition={{ duration: 0.25, ease: "easeOut" }}
                                         layout
-                                        className={`inline-flex items-center gap-1 bg-white font-bold px-3 py-1.5 rounded-full text-xs shadow-sm hover:-translate-y-0.5 hover:rotate-1 transition-all duration-200 cursor-default ${badgeStyle}`}
+                                        className={`inline-flex items-center gap-1 font-bold px-3 py-1.5 rounded-full text-xs shadow-sm hover:-translate-y-0.5 hover:rotate-1 transition-all duration-200 cursor-default ${badgeStyle}`}
                                     >
                                         {isOdd ? <Sparkle className="w-3.5 h-3.5" weight="bold" /> : <Check className="w-3.5 h-3.5" weight="bold" />}
                                         {badge}
@@ -268,9 +272,8 @@ export default function Welcome() {
             title="Welcome" 
             containerClassName="w-full relative" // override to let child page control internal container styling
         >
-            {/* Hero Section */}
-            {/* Masalah 4 fix: pb-[280px] diganti dengan min-h-screen agar seimbang dalam scroll snap */}
-            <section className="snap-section brand-section brand-section-transparent max-w-7xl mx-auto px-6 min-h-screen grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <section className="snap-section brand-section brand-section-transparent min-h-screen flex items-center w-full">
+                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
                 <motion.div 
                     variants={containerVariants}
                     initial="hidden"
@@ -395,6 +398,7 @@ export default function Welcome() {
                         Tap card to swap / shuffle
                     </span>
                 </motion.div>
+                </div>
             </section>
 
             {/* Services Section */}
@@ -408,7 +412,7 @@ export default function Welcome() {
                         className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4"
                     >
                         <div className="flex flex-col items-start gap-4">
-                            <span className="bg-brand-blue text-white font-extrabold text-xs px-3 py-1.5 rounded-full uppercase tracking-wider">
+                            <span className="bg-brand-blue text-white font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-widest">
                                 Our Methodology
                             </span>
                             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
@@ -429,7 +433,7 @@ export default function Welcome() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                            className="md:col-span-4 brand-card hover:border-brand-blue/40 flex flex-col justify-between group min-h-[260px]"
+                            className="md:col-span-4 brand-card hover:border-brand-blue/30 flex flex-col justify-between group min-h-[260px]"
                         >
                             <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-brand-blue/10 blur-2xl group-hover:bg-brand-blue/20 transition-all" />
                             <div className="flex flex-col gap-4 z-10">
@@ -540,7 +544,7 @@ export default function Welcome() {
                             <span className="text-brand-lime text-xs font-black tracking-widest uppercase flex items-center gap-1">
                                 <Gear className="w-4 h-4" weight="bold" /> Live Customizer
                             </span>
-                            <h3 className="text-3xl font-extrabold tracking-tight leading-tight">
+                            <h3 className="text-3xl font-black tracking-tight leading-tight">
                                 Customize & Interact
                             </h3>
                             <p className="text-sm text-white/70">
@@ -667,7 +671,7 @@ export default function Welcome() {
                         className="max-w-2xl mx-auto flex flex-col gap-4 mb-16"
                     >
                         <span className="text-brand-lime text-xs font-black uppercase tracking-widest">Why Choose systemify.id</span>
-                        <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+                        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
                             Monolithic speed, <span className="font-serif italic font-normal text-brand-lime">premium visual language</span>
                         </h2>
                         <p className="text-white/70">
@@ -681,9 +685,9 @@ export default function Welcome() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                            className="brand-card flex flex-col gap-4"
+                            className="brand-card flex flex-col gap-4 group"
                         >
-                            <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-brand-lime/8 blur-xl" />
+                            <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-brand-lime/[0.06] group-hover:bg-brand-lime/[0.18] transition-all duration-300 blur-xl" />
                             <div className="w-10 h-10 rounded-full bg-brand-lime text-brand-dark flex items-center justify-center font-extrabold z-10">
                                 01
                             </div>
@@ -698,9 +702,9 @@ export default function Welcome() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                            className="brand-card flex flex-col gap-4"
+                            className="brand-card flex flex-col gap-4 group"
                         >
-                            <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-brand-blue/8 blur-xl" />
+                            <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-brand-blue/[0.06] group-hover:bg-brand-blue/[0.18] transition-all duration-300 blur-xl" />
                             <div className="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center font-extrabold z-10">
                                 02
                             </div>
@@ -715,9 +719,9 @@ export default function Welcome() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                            className="brand-card flex flex-col gap-4"
+                            className="brand-card flex flex-col gap-4 group"
                         >
-                            <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-white/5 blur-xl" />
+                            <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-white/[0.03] group-hover:bg-white/[0.12] transition-all duration-300 blur-xl" />
                             <div className="w-10 h-10 rounded-full bg-white text-brand-dark flex items-center justify-center font-extrabold z-10">
                                 03
                             </div>
@@ -742,7 +746,7 @@ export default function Welcome() {
                     >
                     <div className="text-center flex flex-col gap-3 mb-8">
                         <span className="text-brand-lime text-xs font-black uppercase tracking-widest">Connect with us</span>
-                        <h3 className="text-3xl font-extrabold tracking-tight leading-tight">
+                        <h3 className="text-3xl font-black tracking-tight leading-tight">
                             Ready to <span className="font-serif italic font-normal text-brand-lime">systemify?</span>
                         </h3>
                         <p className="text-sm text-white/60">

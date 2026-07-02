@@ -83,7 +83,7 @@ export default function AppLayout({
                             {auth.user ? (
                                 <Link
                                     href={route('dashboard')}
-                                    className="px-5 py-2.5 bg-white/10 hover:bg-white/15 text-white font-bold rounded-full text-sm border border-white/10 hover:border-white/20 transition-all duration-300"
+                                    className="px-5 py-2.5 bg-white/10 hover:bg-white/15 text-white font-bold rounded-full text-sm border border-white/10 hover:border-white/20 transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
                                 >
                                     Dashboard
                                 </Link>
@@ -97,7 +97,7 @@ export default function AppLayout({
                                     </Link>
                                     <Link
                                         href={route('register')}
-                                        className="px-6 py-2.5 bg-brand-lime text-brand-dark font-extrabold rounded-full text-sm hover:scale-105 active:scale-95 transition-all duration-200 shadow-[0_0_20px_rgba(181,255,0,0.3)]"
+                                        className="px-6 py-2.5 bg-brand-lime text-brand-dark font-extrabold rounded-full text-sm hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 shadow-[0_0_20px_rgba(181,255,0,0.3)]"
                                     >
                                         Get Started
                                     </Link>
@@ -151,6 +151,13 @@ export function CustomCursor() {
     const ringCoords = useRef({ x: -100, y: -100 });
     const [hovered, setHovered] = useState(false);
     const [hoverType, setHoverType] = useState('lime'); // 'lime' or 'blue'
+
+    useEffect(() => {
+        document.documentElement.classList.add('has-custom-cursor');
+        return () => {
+            document.documentElement.classList.remove('has-custom-cursor');
+        };
+    }, []);
 
     useEffect(() => {
         const onMouseMove = (e) => {
